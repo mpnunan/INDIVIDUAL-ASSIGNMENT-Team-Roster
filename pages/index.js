@@ -1,7 +1,7 @@
-import { useAuth } from '../utils/context/authContext';
+// import { useAuth } from '../utils/context/authContext';
 
 function Home() {
-  const { user } = useAuth();
+  // const { user } = useAuth();
 
   return (
     <div
@@ -13,7 +13,7 @@ function Home() {
         margin: '0 auto',
       }}
     >
-      <h1>Hello {user.displayName}! </h1>
+      <h1>Hey, Slugger</h1>
     </div>
   );
 }
