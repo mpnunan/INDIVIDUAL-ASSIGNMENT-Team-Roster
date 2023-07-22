@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { getAllTeams } from '../api/teamData';
+import { useAuth } from '../utils/context/authContext';
+import { getTeams } from '../api/teamData';
 import TeamDisplay from '../components/TeamDisplay';
 
 export default function MyTeams() {
   const [teams, setTeams] = useState([]);
 
-  const getEveryTeam = () => {
-    getAllTeams().then(setTeams);
+  const { user } = useAuth();
+
+  const getMyTeams = () => {
+    getTeams(user.uid).then(setTeams);
   };
 
   useEffect(() => {
-    getEveryTeam();
+    getMyTeams();
   }, []);
 
   return (
