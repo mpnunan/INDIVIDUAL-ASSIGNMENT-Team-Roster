@@ -32,7 +32,7 @@ const getSingleTeam = async (firebaseKey) => {
     },
   });
   const team = await response.json();
-  return Object.values(team);
+  return team;
 };
 
 const createTeam = async (payload) => {
@@ -47,11 +47,6 @@ const createTeam = async (payload) => {
   return newTeam;
 };
 
-const getTeamRoster = async (firebaseKey) => {
-  const team = await getSingleTeam(firebaseKey);
-  return team.roster;
-};
-
 export {
-  getTeams, getSingleTeam, createTeam, getTeamRoster, getAllTeams,
+  getTeams, getSingleTeam, createTeam, getAllTeams,
 };

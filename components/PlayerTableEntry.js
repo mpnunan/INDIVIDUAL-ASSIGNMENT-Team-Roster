@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { getSinglePlayer } from '../api/playerData';
 
-export default function PlayerTableEntry({ playerObj }) {
-  console.warn({ playerObj });
+export default function PlayerTableEntry({ firebaseKey }) {
+  const [playerObj, setPlayerObj] = useState({});
+
+  const getPlayer = (key) => {
+    getSinglePlayer(key).then(setPlayerObj);
+  };
+
+  useEffect(() => {
+    getPlayer(firebaseKey);
+  }, [firebaseKey]);
+
   return (
     <tr>
       <td>{playerObj.jerseyNumber}</td>
@@ -19,4 +29,5 @@ PlayerTableEntry.propTypes = {
     role: PropTypes.string,
     captain: PropTypes.bool,
   }).isRequired,
+  firebaseKey: PropTypes.string.isRequired,
 };

@@ -4,6 +4,7 @@ function Home() {
   // const { user } = useAuth();
 
   return (
+
     <div
       className="text-center d-flex flex-column justify-content-center align-content-center"
       style={{
@@ -13,7 +14,7 @@ function Home() {
         margin: '0 auto',
       }}
     >
-      <h1>Hey, Slugger</h1>
+      <h1>Welcome</h1>
     </div>
   );
 }

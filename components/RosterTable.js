@@ -4,7 +4,6 @@ import { Table } from 'react-bootstrap';
 import PlayerTableEntry from './PlayerTableEntry';
 
 export default function RosterTable({ teamObj, rosterArr }) {
-  console.warn({ teamObj, rosterArr });
   return (
     <Table striped bordered hover variant="dark">
       <thead>
@@ -21,7 +20,7 @@ export default function RosterTable({ teamObj, rosterArr }) {
       </thead>
       <tbody>
         {rosterArr?.map((player) => (
-          <PlayerTableEntry key={player.firebaseKey} playerObj={player} />
+          <PlayerTableEntry key={player} firebaseKey={player} />
         ))}
       </tbody>
     </Table>
@@ -33,12 +32,5 @@ RosterTable.propTypes = {
     name: PropTypes.string,
     firebaseKey: PropTypes.string,
   }).isRequired,
-  rosterArr: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string,
-      jerseyNumber: PropTypes.number,
-      role: PropTypes.string,
-      captain: PropTypes.bool,
-    }),
-  ).isRequired,
+  rosterArr: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

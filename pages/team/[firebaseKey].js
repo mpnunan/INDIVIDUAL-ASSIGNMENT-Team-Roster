@@ -1,26 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { getTeamRoster, getSingleTeam } from '../../api/teamData';
 import RosterTable from '../../components/RosterTable';
+import { getSingleTeam } from '../../api/teamData';
 
 export default function TeamDetails() {
   const [teamRoster, setTeamRoster] = useState([]);
   const router = useRouter();
   const { firebaseKey } = router.query;
-  const thisTeam = getSingleTeam(firebaseKey);
+  const team = getSingleTeam(firebaseKey);
 
-  const getRoster = (key) => {
-    getTeamRoster(key).then(setTeamRoster);
+  const getTeamRoster = (key) => {
+    getSingleTeam(key).then((teamObj) => {
+      setTeamRoster(teamObj.roster);
+    });
   };
 
-  useEffect(() => {
-    getRoster(firebaseKey);
-  }, [firebaseKey]);
+  // this is broken fix it. getteamroster return array of keys not objects.
 
+  useEffect(() => {
+    getTeamRoster(firebaseKey);
+  }, [firebaseKey]);
   console.warn(teamRoster);
   return (
     <>
-      <RosterTable key={thisTeam.firebaseKey} teamObj={thisTeam} roster={teamRoster} />
+      <RosterTable key={firebaseKey} teamObj={team} rosterArr={teamRoster} />
     </>
   );
 }

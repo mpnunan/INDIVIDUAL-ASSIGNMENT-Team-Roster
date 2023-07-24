@@ -14,6 +14,17 @@ const getPlayers = async (uid) => {
   return Object.values(players);
 };
 
+const getAllPlayers = async () => {
+  const response = await fetch(`${endpoint}/players/.json`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  const players = await response.json();
+  return Object.values(players);
+};
+
 const getSinglePlayer = async (firebaseKey) => {
   const response = await fetch(`${endpoint}/players/${firebaseKey}.json`, {
     method: 'GET',
@@ -22,7 +33,7 @@ const getSinglePlayer = async (firebaseKey) => {
     },
   });
   const player = await response.json();
-  return Object.values(player);
+  return player;
 };
 
 const createPlayer = async (payload) => {
@@ -51,5 +62,5 @@ const getplayerTeam = async (playerFirebaseKey) => {
 };
 
 export {
-  getPlayers, getSinglePlayer, createPlayer, getplayerTeam,
+  getPlayers, getSinglePlayer, createPlayer, getplayerTeam, getAllPlayers,
 };
