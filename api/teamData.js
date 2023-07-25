@@ -47,6 +47,18 @@ const createTeam = async (payload) => {
   return newTeam;
 };
 
+const updateTeam = async (payload) => {
+  const response = await fetch(`${endpoint}/teams/${payload.firebaseKey}.json`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  });
+  const team = await response.json();
+  return team;
+};
+
 export {
-  getTeams, getSingleTeam, createTeam, getAllTeams,
+  getTeams, getSingleTeam, createTeam, getAllTeams, updateTeam,
 };

@@ -8,13 +8,13 @@ export default function MyTeams() {
 
   const { user } = useAuth();
 
-  const getMyTeams = () => {
-    getTeams(user.uid).then(setTeams);
+  const getMyTeams = (uid) => {
+    getTeams(uid).then(setTeams);
   };
 
   useEffect(() => {
-    getMyTeams();
-  }, []);
+    getMyTeams(user.uid);
+  }, [user.uid]);
 
   return (
     <div className="teams">
