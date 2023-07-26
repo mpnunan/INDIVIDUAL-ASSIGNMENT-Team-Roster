@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import { useAuth } from '../utils/context/authContext';
 import { createPlayer, updatePlayer } from '../api/playerData';
+import draftPlayer from '../api/mergedData';
 
 const initialState = {
   name: '',
@@ -46,7 +47,7 @@ export default function PlayerForm({ playerObj, teamObj }) {
       const payload = { ...formInput, uid: user.uid, teamName: team?.name };
       createPlayer(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
-        updatePlayer(patchPayload).then(() => {
+        draftPlayer(patchPayload, team?.firebaseKey).then(() => {
           router.push(`/team/${firebaseKey}`);
         });
       });
