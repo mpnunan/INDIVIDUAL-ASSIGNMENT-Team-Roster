@@ -56,7 +56,7 @@ export default function PlayerForm({ playerObj, teamObj }) {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <h1>{ playerObj.firebaseKey ? 'Update' : team?.name } would like to draft the following player:</h1>
+      <h1>{ playerObj.firebaseKey ? 'Update' : `${team?.name} would like to draft the following player` }</h1>
       <FloatingLabel controlId="name" label="Name">
         <Form.Control
           type="text"
