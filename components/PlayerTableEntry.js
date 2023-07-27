@@ -15,11 +15,11 @@ export default function PlayerTableEntry({ firebaseKey }) {
 
   return (
     <tr>
-      <td>{playerObj.jerseyNumber}</td>
+      <td>{playerObj?.jerseyNumber}</td>
       <td>
-        <a href={`/player/${playerObj.firebaseKey}`}>{playerObj.name}{playerObj.captain ? '  "C"' : ''}</a>
+        <a href={`/player/${playerObj?.firebaseKey}`}>{playerObj?.name}{playerObj?.captain ? '  "C"' : ''}</a>
       </td>
-      <td>{playerObj.role}</td>
+      <td>{playerObj?.role}</td>
     </tr>
   );
 }

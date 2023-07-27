@@ -7,17 +7,17 @@ export default function PlayerDisplay({ playerObj }) {
   return (
     <Card style={{ width: '18rem' }}>
       <Card.Body>
-        <Card.Title>{playerObj.name}</Card.Title>
+        <Card.Title>{playerObj?.name}</Card.Title>
         <Card.Text>
-          {playerObj.role}
+          {playerObj?.role}
         </Card.Text>
         <Card.Text>
-          {`for ${playerObj.teamName}`}
+          {`for ${playerObj?.teamName}`}
         </Card.Text>
         <Card.Text>
-          {`# ${playerObj.jerseyNumber}`}
+          {`# ${playerObj?.jerseyNumber}`}
         </Card.Text>
-        <Link href={`/player/edit//${playerObj.firebaseKey}`} passHref>
+        <Link href={`/player/edit//${playerObj?.firebaseKey}`} passHref>
           <Button variant="primary">Update Info</Button>
         </Link>
       </Card.Body>
