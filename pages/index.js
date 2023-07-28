@@ -2,7 +2,6 @@
 
 function Home() {
   // const { user } = useAuth();
-
   return (
 
     <div

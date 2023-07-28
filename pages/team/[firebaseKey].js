@@ -5,9 +5,9 @@ import { getSingleTeam } from '../../api/teamData';
 
 export default function TeamDetails() {
   const [teamRoster, setTeamRoster] = useState([]);
+  const [team, setTeam] = useState({});
   const router = useRouter();
   const { firebaseKey } = router.query;
-  const team = getSingleTeam(firebaseKey);
 
   const getTeamRoster = (key) => {
     getSingleTeam(key).then((teamObj) => {
@@ -15,12 +15,14 @@ export default function TeamDetails() {
     });
   };
 
-  // this is broken fix it. getteamroster return array of keys not objects.
+  const getTeam = (key) => {
+    getSingleTeam(key).then(setTeam);
+  };
 
   useEffect(() => {
+    getTeam(firebaseKey);
     getTeamRoster(firebaseKey);
   }, [firebaseKey]);
-  console.warn(teamRoster);
   return (
     <>
       <RosterTable key={firebaseKey} teamObj={team} rosterArr={teamRoster} />

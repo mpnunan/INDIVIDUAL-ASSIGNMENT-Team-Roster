@@ -16,7 +16,9 @@ export default function PlayerTableEntry({ firebaseKey }) {
   return (
     <tr>
       <td>{playerObj.jerseyNumber}</td>
-      <td>{playerObj.name}{playerObj.captain ? '  "C"' : ''}</td>
+      <td>
+        <a href={`/player/${playerObj.firebaseKey}`}>{playerObj.name}{playerObj.captain ? '  "C"' : ''}</a>
+      </td>
       <td>{playerObj.role}</td>
     </tr>
   );
@@ -28,6 +30,7 @@ PlayerTableEntry.propTypes = {
     jerseyNumber: PropTypes.number,
     role: PropTypes.string,
     captain: PropTypes.bool,
+    firebaseKey: PropTypes.string,
   }).isRequired,
   firebaseKey: PropTypes.string.isRequired,
 };
