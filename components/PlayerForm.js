@@ -12,6 +12,7 @@ const initialState = {
   role: '',
   teamName: '',
   captain: false,
+  team: '',
 };
 
 const initialTeamState = {
@@ -44,7 +45,9 @@ export default function PlayerForm({ playerObj, teamObj }) {
     if (playerObj.firebaseKey) {
       updatePlayer(formInput).then(() => router.push(`/player/${playerObj.firebaseKey}`));
     } else {
-      const payload = { ...formInput, uid: user.uid, teamName: team?.name };
+      const payload = {
+        ...formInput, uid: user.uid, teamName: team?.teamName, team: team?.firebaseKey,
+      };
       createPlayer(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
         draftPlayer(patchPayload, team?.firebaseKey).then(() => {
@@ -104,6 +107,7 @@ PlayerForm.propTypes = {
     teamName: PropTypes.string,
     captain: PropTypes.bool,
     firebaseKey: PropTypes.string,
+    team: PropTypes.string,
   }),
   teamObj: PropTypes.shape({
     firebaseKey: PropTypes.string,

@@ -60,6 +60,17 @@ const updatePlayer = async (payload) => {
   return player;
 };
 
+const deletePlayer = async (firebaseKey) => {
+  const response = await fetch(`${endpoint}/players/${firebaseKey}.json`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  const player = await response.json();
+  return player;
+};
+
 const getplayerTeam = async (playerFirebaseKey) => {
   let playerTeam = '';
   await getAllTeams()
@@ -74,5 +85,5 @@ const getplayerTeam = async (playerFirebaseKey) => {
 };
 
 export {
-  getPlayers, getSinglePlayer, createPlayer, getplayerTeam, getAllPlayers, updatePlayer,
+  getPlayers, getSinglePlayer, createPlayer, getplayerTeam, getAllPlayers, updatePlayer, deletePlayer,
 };
