@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { getSinglePlayer } from '../api/playerData';
 
+const defaultPlayerState = {};
 export default function PlayerTableEntry({ firebaseKey }) {
   const [playerObj, setPlayerObj] = useState({});
 
@@ -17,7 +18,7 @@ export default function PlayerTableEntry({ firebaseKey }) {
     <tr>
       <td>{playerObj.jerseyNumber}</td>
       <td>
-        <a href={`/player/${playerObj.firebaseKey}`}>{playerObj.name}{playerObj.captain ? '  "C"' : ''}</a>
+        <a href={`/player/${playerObj?.firebaseKey}`}>{playerObj.name}{playerObj.captain ? '  "C"' : ''}</a>
       </td>
       <td>{playerObj.role}</td>
     </tr>
@@ -31,6 +32,10 @@ PlayerTableEntry.propTypes = {
     role: PropTypes.string,
     captain: PropTypes.bool,
     firebaseKey: PropTypes.string,
-  }).isRequired,
+  }),
   firebaseKey: PropTypes.string.isRequired,
+};
+
+PlayerTableEntry.defaultProps = {
+  playerObj: defaultPlayerState,
 };

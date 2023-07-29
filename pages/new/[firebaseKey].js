@@ -11,6 +11,6 @@ export default function AddPlayer() {
   useEffect(() => {
     getSingleTeam(firebaseKey).then(setTeam);
   }, [firebaseKey]);
-
+  console.warn(team);
   return <PlayerForm teamObj={team} />;
 }
