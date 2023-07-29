@@ -1,16 +1,6 @@
 import { deletePlayer, updatePlayer } from './playerData';
 import { getSingleTeam, updateTeam } from './teamData';
 
-const draftPlayer = async (payload, teamFirebaseKey) => {
-  await updatePlayer(payload);
-  await getSingleTeam(teamFirebaseKey)
-    .then((team) => {
-      team.roster.push(payload.firebaseKey);
-      return team;
-    })
-    .then((newRoster) => updateTeam(newRoster, teamFirebaseKey));
-};
-
 const cutPlayer = async (playerFirebaseKey, teamFirebaseKey) => {
   await deletePlayer(playerFirebaseKey);
   await getSingleTeam(teamFirebaseKey)
@@ -22,6 +12,16 @@ const cutPlayer = async (playerFirebaseKey, teamFirebaseKey) => {
     .then((rosterArr) => {
       updateTeam({ roster: rosterArr }, teamFirebaseKey);
     });
+};
+
+const draftPlayer = async (payload, teamFirebaseKey) => {
+  await updatePlayer(payload);
+  await getSingleTeam(teamFirebaseKey)
+    .then((team) => {
+      team.roster.push(payload.firebaseKey);
+      return team;
+    })
+    .then((newRoster) => updateTeam(newRoster, teamFirebaseKey));
 };
 
 export { draftPlayer, cutPlayer };
