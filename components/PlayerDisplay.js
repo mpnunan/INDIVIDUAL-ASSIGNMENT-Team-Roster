@@ -7,13 +7,12 @@ import { cutPlayer } from '../api/mergedData';
 
 export default function PlayerDisplay({ playerObj }) {
   const router = useRouter();
-  const teamKey = playerObj.team;
 
   const deleteThisPlayer = () => {
     if (window.confirm(`Delete ${playerObj.name}?`)) {
-      cutPlayer(playerObj.firebaseKey, teamKey)
+      cutPlayer(playerObj.firebaseKey, playerObj.team)
         .then(() => {
-          router.push(`/team/${teamKey}`);
+          router.push(`/team/${playerObj.team}`);
         });
     }
   };
@@ -29,9 +28,9 @@ export default function PlayerDisplay({ playerObj }) {
           {`for ${playerObj?.teamName}`}
         </Card.Text>
         <Card.Text>
-          {`# ${playerObj?.jerseyNumber}`}
+          {'# '}{`${playerObj?.jerseyNumber}`}
         </Card.Text>
-        <Link href={`/player/edit//${playerObj?.firebaseKey}`} passHref>
+        <Link href={`/player/edit/${playerObj?.firebaseKey}`} passHref>
           <Button variant="primary">Update Info</Button>
         </Link>
         <Button variant="danger" onClick={deleteThisPlayer}>
@@ -48,7 +47,7 @@ PlayerDisplay.propTypes = {
     firebaseKey: PropTypes.string,
     role: PropTypes.string,
     teamName: PropTypes.string,
-    jerseyNumber: PropTypes.number,
+    jerseyNumber: PropTypes.string,
     team: PropTypes.string,
   }).isRequired,
 };

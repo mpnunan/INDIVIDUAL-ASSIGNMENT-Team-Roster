@@ -46,11 +46,11 @@ export default function PlayerForm({ playerObj, teamObj }) {
       updatePlayer(formInput).then(() => router.push(`/player/${playerObj.firebaseKey}`));
     } else {
       const payload = {
-        ...formInput, uid: user.uid, teamName: team?.teamName, team: team?.firebaseKey,
+        ...formInput, uid: user.uid, teamName: team.name, team: team.firebaseKey,
       };
       createPlayer(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
-        draftPlayer(patchPayload, team?.firebaseKey).then(() => {
+        draftPlayer(patchPayload, team.firebaseKey).then(() => {
           router.push(`/team/${firebaseKey}`);
         });
       });
